@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nxm-Yp-Gdr">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="94" width="600" height="506"/>
                                 <animations/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -181,13 +181,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4uv-4i-H5T">
-                        <barButtonItem key="leftBarButtonItem" title="   清除" id="5uK-hY-l07">
+                        <barButtonItem key="leftBarButtonItem" image="delete" id="5uK-hY-l07">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onClearButtonTouch:" destination="zlK-UP-MPd" id="FhU-B8-rtR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="nxm-Yp-Gdr" id="Rvc-2F-dpQ"/>
                     </connections>
@@ -198,6 +199,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="delete" width="15" height="20"/>
         <image name="line_h" width="1" height="1"/>
     </resources>
 </document>
