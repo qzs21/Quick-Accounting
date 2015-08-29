@@ -1,4 +1,4 @@
 # Quick-Accounting
-Quick accounting is iOS application.It's for my mom.
+Quick accounting is an iOS application. It's for my mom.
 
 ![](./snapshot/snapshot.png)
