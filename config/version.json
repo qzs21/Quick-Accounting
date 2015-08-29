@@ -1,0 +1,8 @@
+{
+	"base" : {
+		"version" : "0.1",
+		"build" : "2",
+		"info" : "去除数字，增加随机颜色",
+		"url" : "http://qzs21.github.io/Quick-Accounting/"
+	}
+}
