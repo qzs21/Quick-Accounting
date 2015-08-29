@@ -35,23 +35,27 @@
                             animated:UINavigationControllerAnimatedNone];
     
     
-    [[AFHTTPRequestOperationManager manager] GET:CHECK_NEW_VERSION_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer]; // 更换默认的JSON解析器
+    [manager GET:CHECK_NEW_VERSION_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        if ([responseObject isKindOfClass:NSDictionary.class])
+        NSDictionary * data = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([data isKindOfClass:NSDictionary.class])
         {
-            NSDictionary * data = responseObject;
             
             NSString * build = data[@"base"][@"build"];
             NSString * version = data[@"base"][@"version"];
             NSString * info = data[@"base"][@"info"];
             NSString * url = data[@"base"][@"url"];
             
-            NSUInteger currentVersion = [[UIDevice appBuildVersion] integerValue];
-            NSUInteger newVersion = [build integerValue];
-            if (newVersion > currentVersion && url.length)
+            NSLog(@"[UIDevice appBuildVersion]: %@", [UIDevice appBuildVersion]);
+            NSUInteger currentBuild = [[UIDevice appBuildVersion] integerValue];
+            NSUInteger newBuild = [build integerValue];
+            if (newBuild > currentBuild && url.length)
             {
                 [[UIAlertView bk_showAlertViewWithTitle:@"有新版本更新哦！"
-                                                message:[NSString stringWithFormat:@"%@(build:%@)\n%@", version, build, info]
+                                                message:[NSString stringWithFormat:@"版本:%@(build_%@)\n更新内容:%@", version, build, info]
                                       cancelButtonTitle:@"取消"
                                       otherButtonTitles:@[@"更新"]
                                                 handler:^(UIAlertView *alertView, NSInteger buttonIndex)
@@ -61,7 +65,6 @@
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
                     }
                 }] show];
-                
             }
         }
     } failure:nil];
